@@ -1,31 +1,42 @@
-FROM dockerfile/nodejs-bower-grunt
+FROM node
 MAINTAINER Sébastien LECACHEUR "slecache@gmail.com"
+
+#
+# install Bower & Grunt
+#
+RUN npm install -g bower grunt-cli
+
+#
+# define working directory.
+#
+WORKDIR /data
 
 #
 # download lastest version of RAML api:Console
 #
-RUN git clone https://github.com/mulesoft/api-console.git /data
-RUN mkdir /data/app/apis
-RUN mv /data/app/examples/test.raml /data/app/apis/main.raml
-RUN rm -rf /data/app/examples
-RUN rm -rf /data/dist/examples
-RUN rm -rf /data/test
+RUN git clone https://github.com/mulesoft/api-console.git /data \
+        && mkdir /data/dist/apis \
+        && mv /data/dist/examples/simple.raml /data/dist/apis/main.raml \
+        && rm -rf /data/dist/examples \
+        && rm -rf /data/src \
+        && rm -rf /data/test
 
 #
 # install modules and dependencies with NPM and Bower
 #
-RUN npm install
-RUN bower install --allow-root
-RUN npm cache clean
-RUN bower cache clean --allow-root
+RUN npm install \
+        && bower install --allow-root \
+        && npm cache clean \
+        && bower cache clean --allow-root
 
 #
 # add customs files for the API
 #
-RUN sed -i '/<raml-console-initializer id="raml-console-loader">/,/<\/raml-console-initializer>/d' /data/app/index.html
-RUN sed -i 's/<raml-console with-root-documentation>/<raml-console with-root-documentation src="apis\/main.raml">/g' /data/app/index.html
-RUN sed -i "53i\ \ \ \ \ \ \ \ \ \ '<%= yeoman.app %>/apis/**/*.*'," /data/Gruntfile.js
-ONBUILD ADD . /data/app/apis/
+RUN sed -i 's/<raml-initializer><\/raml-initializer>/<raml-console src="apis\/main.raml" resources-collapsed><\/raml-console>/g' /data/dist/index.html
+ONBUILD ADD . /data/dist/apis/
+
+EXPOSE 9000
+EXPOSE 35729
 
 # start Node.js server with Grunt
-ENTRYPOINT ["grunt", "server", "--force"]
+ENTRYPOINT ["grunt", "connect:livereload", "watch"]

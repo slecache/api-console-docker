@@ -20,9 +20,9 @@ Then, access it via `http://localhost:90000` in a browser.
 Your main RAML file MUST be named `main.raml`.
 
 #### Mounting local volume
-    docker run -v /your_local_folder_where_are_your_raml_files:/data/app/apis --name DATA busybox true
+    docker run -v /your_local_folder_where_are_your_raml_files:/data/dist/apis --name DATA busybox true
     docker run --volumes-from DATA -p 9000:9000 -p 35729:35729 -d slecache/api-console
-_Please note that the live reload is activated. The edition of any files in your folder will provoke the auto-reloading of your api:Console in your browser. _
+_Please note that the live reload is activated. The edition of any files in your folder will provoke the auto-reloading of your api:Console in your browser._
 
 #### Building custom image
 At the root of your RAML documentation folder where the `main.raml` MUST be present, create the following `Dockerfile`:
@@ -31,9 +31,9 @@ At the root of your RAML documentation folder where the `main.raml` MUST be pres
 
 Then, run the build command :
 
-    docker build -t your_imahge_name .
+    docker build -t your_image_name .
 
-All yours documentations files will be copied in the `/data/app/apis` of the Docker Image.
+All yours documentations files will be copied in the `/data/dist/apis` of the Docker Image.
 
 ## User feedback
 Issues
