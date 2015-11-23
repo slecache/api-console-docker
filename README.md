@@ -14,7 +14,7 @@ A [Docker](http://www.docker.io/) image to run the [api:Console](https://github.
 
 ### How to use this image
     docker run -p 9000:9000 -d slecache/api-console
-Then, access it via `http://localhost:90000` in a browser.
+Then, access it via `http://localhost:9000` in a browser.
 
 ### How to deploy your API
 Your main RAML file MUST be named `main.raml`.
