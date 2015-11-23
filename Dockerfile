@@ -12,9 +12,10 @@ RUN npm install -g bower grunt-cli
 WORKDIR /data
 
 #
-# download lastest version of RAML api:Console
+# download the specified (API_CONSOLE_VERSION) version of RAML api:Console
 #
-RUN git clone https://github.com/mulesoft/api-console.git /data \
+ENV API_CONSOLE_VERSION 2.0.5
+RUN git clone --branch $API_CONSOLE_VERSION https://github.com/mulesoft/api-console.git /data \
         && mkdir /data/dist/apis \
         && mv /data/dist/examples/simple.raml /data/dist/apis/main.raml \
         && rm -rf /data/dist/examples \

@@ -8,7 +8,7 @@ A [Docker](http://www.docker.io/) image to run the [api:Console](https://github.
     docker pull slecache/api-console
 
 ### Build Docker Image
-    docker build -t slecache/api-console
+    docker build -t slecache/api-console .
 
 ## Quick start
 
