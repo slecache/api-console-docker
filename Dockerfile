@@ -1,5 +1,11 @@
-FROM node
+FROM alpine
 MAINTAINER Sébastien LECACHEUR "slecache@gmail.com"
+
+#
+# install Node & Git
+#
+RUN apk add --update nodejs git \
+		&& rm -rf /var/cache/apk/*
 
 #
 # install Bower & Grunt
@@ -39,5 +45,7 @@ ONBUILD ADD . /data/dist/apis/
 EXPOSE 9000
 EXPOSE 35729
 
+#
 # start Node.js server with Grunt
+#
 ENTRYPOINT ["grunt", "connect:livereload", "watch"]
