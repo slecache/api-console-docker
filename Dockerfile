@@ -21,18 +21,19 @@ WORKDIR /data
 # download the specified (API_CONSOLE_VERSION) version of RAML api:Console
 #
 ENV API_CONSOLE_VERSION 2.0.5
-RUN git clone --branch $API_CONSOLE_VERSION https://github.com/mulesoft/api-console.git /data \
+RUN git clone --depth 1 --branch $API_CONSOLE_VERSION https://github.com/mulesoft/api-console.git /data \
         && mkdir /data/dist/apis \
         && mv /data/dist/examples/simple.raml /data/dist/apis/main.raml \
         && rm -rf /data/dist/examples \
         && rm -rf /data/src \
-        && rm -rf /data/test
+        && rm -rf /data/test \
+        && rm -rf /data/.git
 
 #
 # install modules and dependencies with NPM and Bower
 #
 RUN npm install \
-        && bower install --allow-root \
+        && bower install --production --allow-root \
         && npm cache clean \
         && bower cache clean --allow-root
 
