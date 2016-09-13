@@ -33,6 +33,7 @@ RUN git clone --depth 1 --branch $API_CONSOLE_VERSION https://github.com/mulesof
 # install modules and dependencies with NPM and Bower
 #
 RUN npm install \
+        && sed -i 's/crypto-js\.googlecode\.com\/files/storage\.googleapis\.com\/google-code-archive-downloads\/v2\/code\.google\.com\/crypto-js/g' /data/bower.json \
         && bower install --production --allow-root \
         && npm cache clean \
         && bower cache clean --allow-root
