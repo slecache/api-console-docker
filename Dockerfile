@@ -20,7 +20,7 @@ WORKDIR /data
 #
 # download the specified (API_CONSOLE_VERSION) version of RAML api:Console
 #
-ENV API_CONSOLE_VERSION 2.0.5
+ENV API_CONSOLE_VERSION v3.0.10
 RUN git clone --depth 1 --branch $API_CONSOLE_VERSION https://github.com/mulesoft/api-console.git /data \
         && mkdir /data/dist/apis \
         && mv /data/dist/examples/simple.raml /data/dist/apis/main.raml \
@@ -41,7 +41,7 @@ RUN npm install \
 #
 # add customs files for the API
 #
-RUN sed -i 's/<raml-initializer><\/raml-initializer>/<raml-console src="apis\/main.raml" resources-collapsed><\/raml-console>/g' /data/dist/index.html \
+RUN sed -i 's/<raml-initializer><\/raml-initializer>/<raml-console-loader src="apis\/main.raml" resources-collapsed><\/raml-console-loader>/g' /data/dist/index.html \
 		&& sed -i '40s/resource/\/resource/g' /data/dist/apis/main.raml \
 		&& sed -i '190s/\.\.\./"\.\.\.": "\.\.\."/g' /data/dist/apis/main.raml
 ONBUILD ADD . /data/dist/apis/
