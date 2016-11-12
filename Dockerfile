@@ -41,9 +41,7 @@ RUN npm install \
 #
 # add customs files for the API
 #
-RUN sed -i 's/<raml-initializer><\/raml-initializer>/<raml-console-loader src="apis\/main.raml" resources-collapsed><\/raml-console-loader>/g' /data/dist/index.html \
-		&& sed -i '40s/resource/\/resource/g' /data/dist/apis/main.raml \
-		&& sed -i '190s/\.\.\./"\.\.\.": "\.\.\."/g' /data/dist/apis/main.raml
+RUN sed -i 's/<raml-initializer><\/raml-initializer>/<raml-console-loader src="apis\/main.raml" resources-collapsed><\/raml-console-loader>/g' /data/dist/index.html
 ONBUILD ADD . /data/dist/apis/
 
 EXPOSE 9000
