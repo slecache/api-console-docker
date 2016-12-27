@@ -10,6 +10,12 @@ A [Docker](http://www.docker.io/) image to run the [api:Console](https://github.
 ### Build Docker Image
     docker build -t slecache/api-console .
 
+## Demo
+
+Your can start your free demo server for 2 hours by clicking on the following button:
+
+[![Dply](https://dply.co/b.svg)](https://dply.co/b/8zgpH9Ay) 
+
 ## Quick start
 
 ### How to use this image
