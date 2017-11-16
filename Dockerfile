@@ -4,7 +4,7 @@ MAINTAINER Sébastien LECACHEUR "slecache@gmail.com"
 #
 # install Node & Git
 #
-RUN apk add --update nodejs git \
+RUN apk add --update nodejs nodejs-npm git \
 		&& rm -rf /var/cache/apk/*
 
 #
