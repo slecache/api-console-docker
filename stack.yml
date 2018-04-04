@@ -1,0 +1,7 @@
+version: '3.2'
+services:
+  apiconsole:
+    image: slecache/api-console
+    ports:
+      - '9000:9000'
+      - '35729:35729'
