@@ -11,7 +11,12 @@ A [Docker](http://www.docker.io/) image to run the [api:Console](https://github.
     docker build -t slecache/api-console .
 
 ## Demo
+### Play With Docker
+Your can start your free swarm server for 4 hours by clicking on the following button:
 
+[![Try in PWD](https://cdn.rawgit.com/play-with-docker/stacks/cff22438/assets/images/button.png)](http://play-with-docker.com?stack=https://raw.githubusercontent.com/slecache/api-console-docker/master/stack.yml)
+
+### Dply.co
 Your can start your free demo server for 2 hours by clicking on the following button:
 
 [![Dply](https://dply.co/b.svg)](https://dply.co/b/8zgpH9Ay) 
